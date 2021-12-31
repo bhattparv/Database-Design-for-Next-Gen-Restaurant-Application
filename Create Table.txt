@@ -1,0 +1,121 @@
+CREATE TABLE customer
+(
+ id NUMBER(10) PRIMARY KEY,
+ firstname VARCHAR2(50) NOT NULL,
+ lastname VARCHAR2(50),
+ email VARCHAR2(255) UNIQUE,
+ dateofbirth DATE,
+ hashedpassword VARCHAR2(255) NOT NULL,
+ contactnumber NUMBER(20) UNIQUE);
+ 
+ 
+CREATE TABLE staff(
+id NUMBER(10) PRIMARY KEY,
+firstname VARCHAR2(50) NOT NULL,
+lastname VARCHAR2(50) NOT NULL,
+email VARCHAR2(255) UNIQUE NOT NULL,
+dateofbirth DATE NOT NULL,
+hashedpassword VARCHAR2(255) NOT NULL,
+contactnumber NUMBER(20) UNIQUE NOT NULL,
+type VARCHAR2(50) NOT NULL);
+ 
+ 
+CREATE TABLE schedule(
+staffid NUMBER(10) NOT NULL,
+scheduledate DATE NOT NULL,
+starttime TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+endtime TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+CONSTRAINT pk_schedule_id PRIMARY KEY (staffid,scheduledate),
+CONSTRAINT fk_staff_id FOREIGN KEY(staffid) REFERENCES staff(id)
+);
+
+CREATE TABLE tble(
+id NUMBER(10) PRIMARY KEY,
+status  VARCHAR2(50)  NOT NULL,
+capacity NUMBER(2) NOT NULL,
+layout  VARCHAR2(50)  NOT NULL
+);
+
+CREATE TABLE reservation(
+id NUMBER(10) PRIMARY KEY,
+customerid NUMBER(10) NOT NULL,
+datetime TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+status  VARCHAR2(50)  NOT NULL,
+waitlist NUMBER(2),
+partysize NUMBER(2),
+tableid  NUMBER(2),
+CONSTRAINT fk_reservecust_id FOREIGN KEY(customerid) REFERENCES customer(id),
+CONSTRAINT fk_reservetable_id FOREIGN KEY(tableid) REFERENCES tble(id)
+);
+
+CREATE TABLE orders(
+id NUMBER(10) PRIMARY KEY,
+customerid NUMBER(10) NOT NULL,
+reservationid NUMBER(10) NOT NULL,
+datetime TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+status  VARCHAR2(50)  NOT NULL,
+CONSTRAINT fk_ordercust_id FOREIGN KEY(customerid) REFERENCES customer(id),
+CONSTRAINT fk_orderreserve_id FOREIGN KEY(reservationid) REFERENCES reservation(id)
+);
+
+CREATE TABLE take(
+staffid NUMBER(10) NOT NULL,
+orderid NUMBER(10) NOT NULL,
+CONSTRAINT pk_take_id PRIMARY KEY (staffid,orderid),
+CONSTRAINT fk_takestaff_id FOREIGN KEY(staffid) REFERENCES staff(id),
+CONSTRAINT fk_takeorder_id FOREIGN KEY(orderid) REFERENCES orders(id)
+);
+
+CREATE TABLE menu(
+id NUMBER(10) PRIMARY KEY,
+itemname  VARCHAR2(50)  NOT NULL,
+categories  VARCHAR2(50)  NOT NULL,
+priceusd  FLOAT(5)  NOT NULL
+);
+
+
+CREATE TABLE containedin(
+menuid NUMBER(10) NOT NULL,
+orderid NUMBER(10) NOT NULL,
+quantity NUMBER(10) NOT NULL,
+CONSTRAINT pk_containedin_id PRIMARY KEY (menuid,orderid),
+CONSTRAINT fk_containedinstaff_id FOREIGN KEY(menuid) REFERENCES menu(id),
+CONSTRAINT fk_containedinorder_id FOREIGN KEY(orderid) REFERENCES orders(id)
+);
+
+CREATE TABLE inventory(
+id NUMBER(10) PRIMARY KEY,
+name  VARCHAR2(50)  NOT NULL,
+categories  VARCHAR2(50)  NOT NULL,
+quantity NUMBER(10) NOT NULL
+);
+
+CREATE TABLE menuhasinventory(
+menuid NUMBER(10) NOT NULL,
+inventoryid NUMBER(10) NOT NULL,
+CONSTRAINT pk_menuhasinventory_id PRIMARY KEY (menuid,inventoryid),
+CONSTRAINT fk_menuhasinventorymenu_id FOREIGN KEY(menuid) REFERENCES menu(id),
+CONSTRAINT fk_menuhasinventoryinventory_id FOREIGN KEY(inventoryid) REFERENCES inventory(id)
+);
+
+CREATE TABLE payment(
+id NUMBER(10) PRIMARY KEY,
+orderid NUMBER(10) NOT NULL,
+staffid NUMBER(10) NOT NULL,
+datetime TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+type VARCHAR2(50)  NOT NULL,
+status  VARCHAR2(50)  NOT NULL,
+amountpaid  FLOAT(5)  NOT NULL,
+orderamount  FLOAT(5)  NOT NULL,
+serviceprovider  VARCHAR2(50),
+CONSTRAINT fk_paymentorder_id FOREIGN KEY(orderid) REFERENCES orders(id),
+CONSTRAINT fk_paymentstaff_id FOREIGN KEY(staffid) REFERENCES staff(id)
+);
+
+CREATE TABLE carddetail(
+paymentid NUMBER(10) NOT NULL UNIQUE,
+cardtype VARCHAR2(50)  NOT NULL,
+bankdetail VARCHAR2(50),
+encryptedcardnumber VARCHAR2(255) NOT NULL,
+CONSTRAINT fk_carddetailpayment_id FOREIGN KEY(paymentid) REFERENCES payment(id)
+);
