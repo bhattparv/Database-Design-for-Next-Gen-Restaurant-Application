@@ -1,0 +1,14 @@
+insert into inventory (id, name, categories, quantity) values (51, 'milk', 'grocery', 25);
+insert into inventory (id, name, categories, quantity) values (52, 'coffee beans', 'grocery', 95);
+insert into inventory (id, name, categories, quantity) values (53, 'tea leaves', 'baked goods', 10);
+insert into inventory (id, name, categories, quantity) values (54, 'flour', 'grocery', 63);
+insert into inventory (id, name, categories, quantity) values (55, 'cheese', 'grocery', 82);
+insert into inventory (id, name, categories, quantity) values (56, 'oil', 'dairy', 26);
+insert into inventory (id, name, categories, quantity) values (57, 'bread', 'dairy', 80);
+insert into inventory (id, name, categories, quantity) values (58, 'bun', 'grocery', 16);
+insert into inventory (id, name, categories, quantity) values (59, 'beer', 'dairy', 81);
+insert into inventory (id, name, categories, quantity) values (60, 'whiskey', 'baked goods', 8);
+insert into inventory (id, name, categories, quantity) values (61, 'sugar', 'baked goods', 2);
+insert into inventory (id, name, categories, quantity) values (62, 'salt', 'dairy', 83);
+insert into inventory (id, name, categories, quantity) values (63, 'tomato', 'alcohol', 45);
+insert into inventory (id, name, categories, quantity) values (64, 'potato', 'alcohol', 18);

@@ -1,0 +1,10 @@
+insert into menu (id, itemname, categories, priceusd) values (3001, 'tea', 'food', 30);
+insert into menu (id, itemname, categories, priceusd) values (3002, 'coffee', 'non-alcoholic beverages', 27);
+insert into menu (id, itemname, categories, priceusd) values (3003, 'buttermilk', 'non-alcoholic beverages', 37);
+insert into menu (id, itemname, categories, priceusd) values (3004, 'beer', 'food', 24);
+insert into menu (id, itemname, categories, priceusd) values (3005, 'pizza', 'non-alcoholic beverages', 28);
+insert into menu (id, itemname, categories, priceusd) values (3006, 'sandwich', 'alcoholic beverages', 31);
+insert into menu (id, itemname, categories, priceusd) values (3007, 'burger', 'non-alcoholic beverages', 33);
+insert into menu (id, itemname, categories, priceusd) values (3008, 'chips', 'alcoholic beverages', 29);
+insert into menu (id, itemname, categories, priceusd) values (3009, 'french fries', 'non-alcoholic beverages', 38);
+insert into menu (id, itemname, categories, priceusd) values (3010, 'ice cream', 'alcoholic beverages', 39);

@@ -1,0 +1,10 @@
+insert into tble (id, status, capacity, layout) values (1, 'occupied', 3, 'center');
+insert into tble (id, status, capacity, layout) values (2, 'occupied', 3, 'corner');
+insert into tble (id, status, capacity, layout) values (3, 'occupied', 5, 'corner');
+insert into tble (id, status, capacity, layout) values (4, 'occupied', 6, 'center');
+insert into tble (id, status, capacity, layout) values (5, 'occupied', 7, 'corner');
+insert into tble (id, status, capacity, layout) values (6, 'vacant', 6, 'center');
+insert into tble (id, status, capacity, layout) values (7, 'occupied', 5, 'center');
+insert into tble (id, status, capacity, layout) values (8, 'vacant', 3, 'center');
+insert into tble (id, status, capacity, layout) values (9, 'occupied', 1, 'corner');
+insert into tble (id, status, capacity, layout) values (10, 'occupied', 7, 'center');
